@@ -1,4 +1,4 @@
-# the-times-pdf
+# the-times-pdf ![Deliver](https://github.com/lukebrowne/the-times-pdf/workflows/Deliver/badge.svg?branch=main&event=schedule)
 
 I can't read an e-Paper version of The Times on iOS anymore (previously was
 using [PressReader](https://pressreader.com) but they've removed their
@@ -27,5 +27,5 @@ $ docker run -it --privileged \
 - [X] Download PDF from PressReader online
 - [X] Upload PDF somewhere
 - [X] Send the PDF to myself
-- [ ] Run this every morning
+- [X] Run this every morning
 - [ ] Also handle supplements? (strech)
