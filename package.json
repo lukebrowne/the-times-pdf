@@ -1,0 +1,12 @@
+{
+  "name": "the-times-pdf",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "repository": "https://github.com/lukebrowne/the-times-pdf.git",
+  "author": "Luke Browne <lukebrowne@me.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "puppeteer": "^7.1.0"
+  }
+}
