@@ -8,7 +8,7 @@ available to download as a PDF. I want to fix this by sending myself the PDF of
 the paper every morning 📰
 
 This currently downloads the latest version of The Times/The Sunday Times as a
-PDF and pings sends it as a Slack message.
+PDF and sends it as a Slack message that I pick up on my iPad.
 
 ```bash
 # build the docker image
