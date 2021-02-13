@@ -1,5 +1,6 @@
 const fs = require("fs");
 const puppeteer = require("puppeteer");
+const { WebClient } = require("@slack/web-api");
 
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
@@ -71,7 +72,9 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
         const [confirm] = await page.$x("//button[contains(., 'Download Issue in PDF')]");
         await confirm.click();
 
-        const fileName = await new Promise((resolve, reject) => {
+        console.log("Downloading file");
+
+        const filename = await new Promise((resolve, reject) => {
             const watcher = fs.watch("/tmp/the-times-downloads", (eventType, filename) => {
                 // this is the last event from a chrome download (most are for `.crdownload` files)
                 // there are two final `rename` events from `.crdownload` to the correct `pdf` name
@@ -92,7 +95,20 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
             }, 50000);
         });
         
-        console.log("Downloaded file " + fileName);
+        console.log("Sending file");
+
+        const slack = new WebClient(process.env.SLACK_TOKEN);
+
+        const today = new Date();
+
+        await slack.files.upload({
+            filename,
+            channels: process.env.SLACK_CHANNEL,
+            filetype: "pdf",
+            title: (today.getDay() === 0 ? "The Sunday Times" : "The Times") + " · " + today.toDateString(),
+            initial_comment: "Paper delivery is here 🚲 🗞",
+            file: fs.createReadStream("/tmp/the-times-downloads/" + filename)
+        })
 
         await browser.close();
     } catch (error) {

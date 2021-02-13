@@ -8,7 +8,7 @@ available to download as a PDF. I want to fix this by sending myself the PDF of
 the paper every morning 📰
 
 This currently downloads the latest version of The Times/The Sunday Times as a
-PDF. Soon to upload somewhere and email a link.
+PDF and pings sends it as a Slack message.
 
 ```bash
 # build the docker image
@@ -17,7 +17,7 @@ $ docker build . -t the-times-pdf
 # run a docker container, it must be priviledged to allow Chromium to launch
 $ docker run -it --privileged \
     -e TIMES_EMAIL=test@times.com -e TIMES_PASSWORD=s3cr3t \
-    -v ~/Downloads:/tmp/the-times-downloads \
+    -e SLACK_CHANNEL=C123456789 -e SLACK_TOKEN=xoxb-test-12345 \
     the-times-pdf
 ```
 
@@ -25,7 +25,7 @@ $ docker run -it --privileged \
 
 - [X] Authenticate with The Times
 - [X] Download PDF from PressReader online
-- [ ] Upload PDF somewhere
-- [ ] Email the link to myself
+- [X] Upload PDF somewhere
+- [X] Send the PDF to myself
 - [ ] Run this every morning
 - [ ] Also handle supplements? (strech)
