@@ -1,5 +1,6 @@
 name: Deliver
 on:
+  workflow_dispatch:
   schedule:
     - cron: "12 06 * * *"
 jobs:
