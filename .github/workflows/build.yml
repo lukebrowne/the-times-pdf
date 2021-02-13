@@ -17,4 +17,5 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: docker.pkg.github.com
           repository: lukebrowne/the-times-pdf/the-times-pdf
+          tags: latest
           tag_with_sha: true
