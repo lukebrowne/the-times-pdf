@@ -28,4 +28,4 @@ $ docker run -it --privileged \
 - [X] Upload PDF somewhere
 - [X] Send the PDF to myself
 - [X] Run this every morning
-- [ ] Also handle supplements? (strech)
+- [X] Also handle supplements
