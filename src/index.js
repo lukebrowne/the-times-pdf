@@ -11,8 +11,8 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
         const page = await browser.newPage();
 
         await page._client.send('Page.setDownloadBehavior', { behavior: 'allow', downloadPath: '/tmp/the-times-downloads' });
-        
-        console.log("Going to epaper.thetimes.co.uk");
+
+        console.log("Going to epaper.thetimes.co.uk to authenticate");
         await page.goto("https://epaper.thetimes.co.uk");
       
         console.log("Waiting for navigation");
@@ -23,7 +23,7 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
         await page.click('.toolbar-button-signin');
 
         await sleep(3000);
-      
+
         console.log("Entering email");
         await page.waitForSelector('input[name="email"]');
         await page.type('input[name="email"]', process.env.TIMES_EMAIL, { delay: 50 });
@@ -41,6 +41,17 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
         console.log("Waiting for signed in success");
         await page.waitForSelector('a.toolbar-button-signin span.logged-in');
+
+        const today = new Date();
+
+        const isSunday = today.getDay() === 0;
+
+        const ePaperPath = isSunday ? "/the-sunday-times" : "/the-times";
+
+        console.log("Going to edition url epaper.thetimes.co.uk" + ePaperPath);
+        await page.goto("https://epaper.thetimes.co.uk" + ePaperPath);
+
+        await page.waitForNavigation({ waitUntil: "networkidle2" });
 
         await sleep(3000);
 
@@ -99,13 +110,11 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
         const slack = new WebClient(process.env.SLACK_TOKEN);
 
-        const today = new Date();
-
         await slack.files.upload({
             filename,
             channels: process.env.SLACK_CHANNEL,
             filetype: "pdf",
-            title: (today.getDay() === 0 ? "The Sunday Times" : "The Times") + " · " + today.toDateString(),
+            title: (isSunday ? "The Sunday Times" : "The Times") + " · " + today.toDateString(),
             initial_comment: "Paper delivery is here 🚲 🗞",
             file: fs.createReadStream("/tmp/the-times-downloads/" + filename)
         })
