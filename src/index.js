@@ -76,40 +76,31 @@ const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
                 "The Sunday Times",
             ],
             [
+                "Times 2",
+                "The Times"
+            ],
+            [
+                "Times 2",
+                "The Times"
+            ],
+            [
+                "Times 2",
+                "The Times"
+            ],
+            [
+                "Times 2",
+                "The Times"
+            ],
+            [
+                "Bricks and Mortar",
+                "Times 2",
+                "The Times"
+            ],
+            [
                 "Sports",
                 "Weekend",
                 "Saturday Review",
                 "Times Magazine",
-                "The Times"
-            ],
-            [
-                "Sports",
-                "Bricks and Mortar",
-                "Times 2",
-                "The Times"
-            ],
-            [
-                "Sports",
-                "Bricks and Mortar",
-                "Times 2",
-                "The Times"
-            ],
-            [
-                "Sports",
-                "Bricks and Mortar",
-                "Times 2",
-                "The Times"
-            ],
-            [
-                "Sports",
-                "Bricks and Mortar",
-                "Times 2",
-                "The Times"
-            ],
-            [
-                "Sports",
-                "Bricks and Mortar",
-                "Times 2",
                 "The Times"
             ]
         ];
